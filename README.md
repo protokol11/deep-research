@@ -1,6 +1,6 @@
 # deep-research
 
-A pi skill that runs a multi-agent web research swarm and returns one cited report.
+An agent skill that runs a multi-agent web research swarm and returns one cited report. Runtime-agnostic: any agent that can spawn subagents and call web tools can run it. [pi](https://github.com/earendil-works/pi-coding-agent) is the first-class supported runtime (skill + extensions); a dedicated pi package, [`pi-deep-research`](https://github.com/protokol11/agent-governance) (npm `@protokol11/pi-deep-research`, wave 2), will bundle the runtime wiring.
 
 ## Why
 
@@ -76,17 +76,26 @@ Two runtime pieces ship under `deep-research/vendor/`:
    that the planned deep-research-compact extension adapts. Reference material, not
    loaded.
 
+## Quick start
+
+```sh
+git clone https://github.com/protokol11/deep-research.git
+cp -r deep-research/deep-research ~/.agents/skills/deep-research
+```
+
+In pi: `/skill:deep-research` (or say "run deep research on X"). Other agents: load `deep-research/SKILL.md` and give it a research question. Details below.
+
 ## Install
 
-Prerequisites: pi with subagent and web tools, plus a `deepseek/deepseek-flash:low`
-model id for researchers and a `kimi-coding/kimi-for-coding:low` id for skeptic and
-merger. Resolve every model id with `subagent({action:"models"})` before a run.
-
-Copy the skill folder into your user skills directory:
+Skill install (any agent runtime):
 
 ```bash
 cp -r deep-research ~/.agents/skills/deep-research
 ```
+
+pi users additionally get runtime wiring through the agent-directory loader vendored below, and — in npm wave 2 — through the [`pi-deep-research`](https://github.com/protokol11/agent-governance) package, which bundles the skill plus its extensions as one install.
+
+Prerequisites: an agent runtime with subagent and web tools. On pi, resolve model ids (`deepseek/deepseek-flash:low` for researchers, `kimi-coding/kimi-for-coding:low` for skeptic and merger by default) with `subagent({action:"models"})` before a run.
 
 ## Usage
 
